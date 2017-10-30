@@ -113,4 +113,4 @@
 
 # Final Question:
 * Is there anything creative you would use Datadog for?
-  * I am currently building a dog walking application and I could see using Datadog to monitor the daily usage of the database. Although I am currently using Firebase, switching to AWS would allow me to do this. If my application ends up growing I could see the efficiency of the database and would be able to test my queries and see if it improves or not.
+  * I am currently building a dog walking application and I could see using Datadog to monitor the daily usage of the database. Although I am currently using Firebase, switching to AWS would allow me to do this. If my application ends up growing I could see the efficiency of the database and would be able to test my queries and see if it improves or not. 
