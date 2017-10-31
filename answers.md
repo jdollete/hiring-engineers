@@ -68,55 +68,56 @@
   * Your custom metric scoped over your host.
   * Any metric from the Integration on your Database with the anomaly function applied.
   * Your custom metric with the rollup function applied to sum up all the points for the past hour into one bucket
-    * ```
-    api_key=e08e4db03d3daeb043fbd42835d41363
-    app_key=0838473e91c073f65421dfc9610473e03f2e267b
-    curl  -X POST -H "Content-type: application/json" \
-    -d '{
-          "graphs" : [{
-            "title": "my_metric",
-            "definition": {
-              "events": [],
-              "requests": [
-                {"q": "avg:my_metric{host:Joes-MBP.fios-router.home}.as_count()"}
-              ]
-            },
-            "viz": "timeseries"
+  ```
+  api_key=e08e4db03d3daeb043fbd42835d41363
+  app_key=0838473e91c073f65421dfc9610473e03f2e267b
+  curl  -X POST -H "Content-type: application/json" \
+  -d '{
+        "graphs" : [{
+          "title": "my_metric",
+          "definition": {
+            "events": [],
+            "requests": [
+              {"q": "avg:my_metric{host:Joes-MBP.fios-router.home}.as_count()"}
+            ]
           },
-          {
-            "title": "PostgreSQL Buffer Hit",
-            "definition": {
-              "events": [],
-              "requests": [
-                {"q": "avg:postgresql.bgwriter.checkpoints_timed{*}.as_count()"}
-              ]
-            },
-            "viz": "timeseries"
+          "viz": "timeseries"
+        },
+        {
+          "title": "PostgreSQL Buffer Hit",
+          "definition": {
+            "events": [],
+            "requests": [
+              {"q": "avg:postgresql.bgwriter.checkpoints_timed{*}.as_count()"}
+            ]
           },
-          {
-            "title": "my_metric rolled up",
-            "definition": {
-              "events": [],
-              "requests": [
-                {"q": "avg:my_metric{host:Joes-MBP.fios-router.home}.as_count().rollup(sum, 3600)"}
-              ]
-            },
-            "viz": "timeseries"
-          }],
-          "title" : "API Example Dashboard",
-          "description" : "A dashboard with memory info.",
-          "template_variables": [{
-              "name": "host1",
-              "prefix": "host",
-              "default": "host:my-host"
-          }],
-          "read_only": "True"
-        }' \
-    "https://app.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=${app_key}"
-    ```
-    * It would not parse my request to show anomalies. I manually changed it on the dashboard once it was created.
-    * ![apiresponse](./images/apiresponse.png "apiresponse")
-    * ![customedash](./images/customedash.png "customedash")
+          "viz": "timeseries"
+        },
+        {
+          "title": "my_metric rolled up",
+          "definition": {
+            "events": [],
+            "requests": [
+              {"q": "avg:my_metric{host:Joes-MBP.fios-router.home}.as_count().rollup(sum, 3600)"}
+            ]
+          },
+          "viz": "timeseries"
+        }],
+        "title" : "API Example Dashboard",
+        "description" : "A dashboard with memory info.",
+        "template_variables": [{
+            "name": "host1",
+            "prefix": "host",
+            "default": "host:my-host"
+        }],
+        "read_only": "True"
+      }' \
+  "https://app.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=${app_key}"
+  ```
+
+  * It would not parse my request to show anomalies. I manually changed it on the dashboard once it was created.
+  * ![apiresponse](./images/apiresponse.png "apiresponse")
+  * ![customedash](./images/customedash.png "customedash")
 * Once this is created, access the Dashboard from your Dashboard List in the UI:
   * Set the Timeboard's timeframe to the past 5 minutes
   * Take a snapshot of this graph and use the @ notation to send it to yourself.
